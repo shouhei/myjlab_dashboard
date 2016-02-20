@@ -21,7 +21,6 @@ class TimeTableCell:
     def is_near_end(self, now):
         diff_hour = self.__end.tm_hour - now.tm_hour
         diff_min = (diff_hour * 60) - (self.__end.tm_min - now.tm_min)
-        print(diff_min)
         return -5 < diff_min < 0
 
 
