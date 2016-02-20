@@ -18,19 +18,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             cl.remove(self)
 
 
-class OtherWebSocketHandler(tornado.websocket.WebSocketHandler):
-    def open(self):
-        if self not in cl:
-            cl.append(self)
-
-    def on_message(self, message):
-        for client in cl:
-            client.write_message(message)
-
-    def on_close(self):
-        if self in cl:
-            cl.remove(self)
-
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
@@ -38,8 +25,7 @@ class MainHandler(tornado.web.RequestHandler):
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
-        (r"/websocket", WebSocketHandler),
-        (r"/other_websocket", OtherWebSocketHandler)
+        (r"/websocket", WebSocketHandler)
     ])
 
 if __name__ == "__main__":
