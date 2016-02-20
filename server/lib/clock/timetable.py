@@ -25,7 +25,7 @@ class TimeTableCell:
 
 
 class TimeTable:
-    __list_ = [
+    __table = [
         TimeTableCell("9:00", "10:30"),
         TimeTableCell("11:00", "12:30"),
         TimeTableCell("13:25", "14:55"),
@@ -34,5 +34,5 @@ class TimeTable:
     ]
 
     @classmethod
-    def list(cls):
-        return cls.__list
+    def table(cls):
+        return cls.__table
