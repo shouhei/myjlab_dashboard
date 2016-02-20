@@ -7,6 +7,14 @@
 * [ ] 天気
 * [ ] メッセージ
 
+# URLリスト
+
+* webの表示
+* web表示用API
+* 研究室Raspberryからの受信
+* 研究室Raspberryからの送信
+* 教授Raspberryからの送信
+
 # APIサーバーの仕様
 
 ```
