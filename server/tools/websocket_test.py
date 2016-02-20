@@ -1,13 +1,19 @@
 import sys
+import os
 from websocket import create_connection
-ws = create_connection("ws://localhost:8888/websocket")
 
-if len(sys.argv) > 1:
-    message = sys.argv[1]
-else:
-    message = 'hello world!'
+if __name__ == "__main__":
+    sys.path.append(os.getcwd())
+    from config import DevelopConfig
+    print(DevelopConfig.websocket_endpoint())
+    ws = create_connection(DevelopConfig.websocket_endpoint() + "/websocket")
 
-print(ws.send(message))
-print(ws.recv())
+    if len(sys.argv) > 1:
+        message = sys.argv[1]
+    else:
+        message = 'hello world!'
 
-ws.close()
+    print(ws.send(message))
+    print(ws.recv())
+
+    ws.close()

@@ -1,5 +1,5 @@
 class BaseConfig:
-    _websocket_protocol = "wc://"
+    _websocket_protocol = "ws://"
     _http_protocol = "http://"
     _endpoint = ""
     _port = ":8888"
