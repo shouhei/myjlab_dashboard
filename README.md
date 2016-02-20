@@ -12,14 +12,13 @@
 * webの表示
 * web表示用API
 * 研究室Raspberryからの受信
-* 研究室Raspberryからの送信
-* 教授Raspberryからの送信
+* 教授Raspberryからの受信
 
-# APIサーバーの仕様
+# web表示APIサーバーの仕様
 
 ```
 {
-   time : "",
+   time : {},
    teacher_status : "",
    lab : {
      temperature: "",
