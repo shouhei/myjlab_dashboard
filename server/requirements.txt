@@ -16,4 +16,5 @@ simplegeneric==0.8.1
 six==1.10.0
 tornado==4.3
 traitlets==4.1.0
+websocket-client==0.35.0
 wrapt==1.10.6

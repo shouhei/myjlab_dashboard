@@ -1,0 +1,14 @@
+<!doctype html>
+<head>
+</head>
+<body>
+    <h1>Lab Dash Board</h1>
+    <div class="message">
+    </div>
+    <script>
+      var ws = new WebSocket("ws://localhost:8888/websocket");
+      ws.onmessage = function(ev) {
+        document.querySelector('.message').innerHTML = ev.data;
+      }
+    </script>
+</body>
