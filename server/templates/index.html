@@ -46,7 +46,25 @@
                             message += "遅延情報はありません"
                         }
                         return message;
-                    break;
+                        break;
+                case "professor":
+                  status = obj["status"];
+                  if(status == "in"){
+                    status_msg = "研究室にいます";
+                  }else if(status == "out"){
+                    status_msg = "外出中です";
+                  }else if(status == "meeting"){
+                    status_msg = "会議中です";
+                  }else if(status == "smoking"){
+                    status_msg = "喫煙中";
+                    }else{
+                    status_msg = "";
+                  }
+                  return message += "宮治先生は" + status_msg;
+                  break;
+
+                case "lab":
+                        return message += "現在の研究室の気温は" + obj["temp"] +"度,湿度は" +obj["fumi"]+"%です。"
             }
         }
         $(function(){
