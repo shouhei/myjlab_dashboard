@@ -7,7 +7,7 @@ from weather import WeatherAPI
 
 if __name__ == "__main__":
     sys.path.append(os.getcwd())
-    from config import VagrantConfig as Config
+    from config import ProductionConfig as Config
     weather = WeatherAPI().get_data()
     if weather is not None:
         ws = create_connection(Config.websocket_endpoint()+"/websocket")
