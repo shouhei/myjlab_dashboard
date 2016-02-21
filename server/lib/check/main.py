@@ -4,7 +4,7 @@ from websocket import create_connection
 
 if __name__ == "__main__":
     sys.path.append(os.getcwd())
-    from config import VagrantConfig as Config
+    from config import ProductionConfig as Config
     message = "check"
     ws = create_connection(Config.websocket_endpoint()+"/websocket")
     ws.send(message)

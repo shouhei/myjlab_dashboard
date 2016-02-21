@@ -1,7 +1,7 @@
 import tornado.web
 import tornado.websocket
 import tornado.httpserver
-from config import VagrantConfig as Config
+from config import ProductionConfig as Config
 import os
 
 cl = []

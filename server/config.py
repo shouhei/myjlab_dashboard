@@ -18,3 +18,7 @@ class DevelopConfig(BaseConfig):
 class VagrantConfig(BaseConfig):
     _endpoint = "192.168.33.100"
     _port = ":80"
+
+class ProductionConfig(BaseConfig):
+    _endpoint = "ec2-52-193-112-208.ap-northeast-1.compute.amazonaws.com"
+    _port = ":80"

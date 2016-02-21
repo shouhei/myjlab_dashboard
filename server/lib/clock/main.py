@@ -7,7 +7,7 @@ import json
 
 if __name__ == "__main__":
     sys.path.append(os.getcwd())
-    from config import VagrantConfig as Config
+    from config import ProductionConfig as Config
     now = time.localtime()
     message = ""
     for key, row in enumerate(TimeTable.table()):
