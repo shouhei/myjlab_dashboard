@@ -1,6 +1,7 @@
-import tornado.ioloop
 import tornado.web
 import tornado.websocket
+import tornado.httpserver
+import os
 
 cl = []
 
@@ -22,13 +23,30 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("templates/index.html")
 
+
+settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),
+    "cookie_secret": "hoigadjfahidufawdfa",
+    "xsrf_cookies": True,
+}
+
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/websocket", WebSocketHandler)
-    ])
+        (r"/other_websocket", OtherWebSocketHandler),
+        (r"/(apple-touch-icon\.png)", tornado.web.StaticFileHandler,
+           dict(path=settings['static_path'])),
+        ], **settings)
+
+
+def main():
+    app = make_app()
+    server = tornado.httpserver.HTTPServer(app)
+    server.bind(8888)
+    server.start(0)  # forks one process per cpu
+    tornado.ioloop.IOLoop.current().start()
+
 
 if __name__ == "__main__":
-    app = make_app()
-    app.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
+    main();
