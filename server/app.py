@@ -34,9 +34,6 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/websocket", WebSocketHandler)
-        (r"/other_websocket", OtherWebSocketHandler),
-        (r"/(apple-touch-icon\.png)", tornado.web.StaticFileHandler,
-           dict(path=settings['static_path'])),
         ], **settings)
 
 
