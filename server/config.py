@@ -14,3 +14,7 @@ class BaseConfig:
 
 class DevelopConfig(BaseConfig):
     _endpoint = "localhost"
+
+class VagrantConfig(BaseConfig):
+    _endpoint = "192.168.33.100"
+    _port = ":80"

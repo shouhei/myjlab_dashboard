@@ -60,7 +60,7 @@ class TrainDataList:
         return None
 
 class TragetTrain:
-    names = ["横浜線","小田原線", "ほくほく線"]
+    names = ["横浜線","小田原線"]
     @classmethod
     def get(cls):
         tmp_data = TrainAPI.get_data()

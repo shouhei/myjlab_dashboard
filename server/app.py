@@ -1,6 +1,7 @@
 import tornado.web
 import tornado.websocket
 import tornado.httpserver
+from config import VagrantConfig as Config
 import os
 
 cl = []
@@ -21,7 +22,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("templates/index.html")
+        self.render("templates/index.html", endpoint=Config.websocket_endpoint())
 
 
 settings = {
