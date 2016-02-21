@@ -14,18 +14,16 @@ class TimeTableCell:
         return self.__end
 
     def is_near_start(self, now):
-        diff_hour = self.__start.tm_hour - now.tm_hour
-        diff_min = (diff_hour * 60) - (self.__start.tm_min - now.tm_min)
+        diff_min = (self.__start.tm_hour * 60 + self.__start.tm_min) - (now.tm_hour * 60 + now.tm_min)
         return 0 < diff_min < 5
 
     def is_near_end(self, now):
-        diff_hour = self.__end.tm_hour - now.tm_hour
-        diff_min = (diff_hour * 60) - (self.__end.tm_min - now.tm_min)
+        diff_min = (self.__end.tm_hour * 60 + self.__end.tm_min) - (now.tm_hour * 60 + now.tm_min)
         return 0 < diff_min < 5
 
 
 class TimeTable:
-    __list_ = [
+    __table = [
         TimeTableCell("9:00", "10:30"),
         TimeTableCell("11:00", "12:30"),
         TimeTableCell("13:25", "14:55"),
@@ -34,5 +32,5 @@ class TimeTable:
     ]
 
     @classmethod
-    def list(cls):
-        return cls.__list
+    def table(cls):
+        return cls.__table

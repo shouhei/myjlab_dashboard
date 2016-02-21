@@ -1,6 +1,8 @@
-import tornado.ioloop
 import tornado.web
 import tornado.websocket
+import tornado.httpserver
+from config import VagrantConfig as Config
+import os
 
 cl = []
 
@@ -20,15 +22,29 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("templates/index.html")
+        self.render("templates/index.html", endpoint=Config.websocket_endpoint())
+
+
+settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),
+    "cookie_secret": "hoigadjfahidufawdfa",
+    "xsrf_cookies": True,
+}
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/websocket", WebSocketHandler)
-    ])
+        ], **settings)
+
+
+def main():
+    app = make_app()
+    server = tornado.httpserver.HTTPServer(app)
+    server.bind(8888)
+    server.start(0)  # forks one process per cpu
+    tornado.ioloop.IOLoop.current().start()
+
 
 if __name__ == "__main__":
-    app = make_app()
-    app.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
+    main();

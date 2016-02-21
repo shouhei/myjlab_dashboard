@@ -1,14 +1,60 @@
 <!doctype html>
 <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Lab Dash Board</h1>
-    <div class="message">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">myj lab dashboard</a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <ul class="message  list-group">
+                </ul>
+            </div>
+        </div>
     </div>
     <script>
-      var ws = new WebSocket("ws://localhost:8888/websocket");
-      ws.onmessage = function(ev) {
-        document.querySelector('.message').innerHTML = ev.data;
-      }
+        make_message = function(obj){
+            console.log(obj);
+            var message = obj["time"]+"<br>";
+            switch(obj["label"]){
+                case "outdoor":
+                        return message +=obj["city"]+"の天気は"+ obj["state"] +"<br>気温は"+ obj["temp"]+"度 湿度は"+obj["humidity"]+ "%";
+                    break;
+                case "clock":
+                        message += obj["message"];
+                        return "";
+                    break;
+                case "train":
+                        for (var tmp in obj["trains"]){
+                             message += obj["compamy"] + obj["name"] + "が遅延しているかもしれません";
+                        }
+                        if(obj["trains"].length == 0){
+                            message += "遅延情報はありません"
+                        }
+                        return message;
+                    break;
+            }
+        }
+        $(function(){
+            var ws = new WebSocket("{{endpoint}}/websocket");
+            ws.onmessage = function(ev) {
+                $('.message').prepend('<li class="list-group-item">' + make_message(JSON.parse(ev.data)) + "</li>").fadeIn('slow');
+            }
+        });
+
     </script>
 </body>
